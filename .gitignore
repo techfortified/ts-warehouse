@@ -1,2 +1,4 @@
 node_modules
 pnpm-lock.yaml
+src/helper2.ts
+src/helper.ts
