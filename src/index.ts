@@ -1,30 +1,6 @@
-import { calculateBestGrouping } from "./helper2";
+import { calculateBestGrouping } from "./helper";
 import { Product } from "./interfaces";
 
-// Example usage:
-// const products: Product[] = [
-//   {
-//     id: '1',
-//     warehouses: [
-//       { warehouseId: 'A', distanceToCustomer: 10 },
-//       { warehouseId: 'B', distanceToCustomer: 15 }
-//     ]
-//   },
-//   {
-//     id: '2',
-//     warehouses: [
-//       { warehouseId: 'A', distanceToCustomer: 12 },
-//       { warehouseId: 'C', distanceToCustomer: 20 }
-//     ]
-//   },
-//   {
-//     id: '3',
-//     warehouses: [
-//       { warehouseId: 'B', distanceToCustomer: 14 },
-//       { warehouseId: 'C', distanceToCustomer: 18 }
-//     ]
-//   }
-// ];
 
 const firstGrouping: Product[] = [
   {
