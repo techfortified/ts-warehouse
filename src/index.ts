@@ -1,40 +1,85 @@
-import { PredictedProcess } from './PredictedProcessTrial';
-import { PredictedProcessesManager } from './PredictedProcessesManagerTrial';
+import { calculateBestGrouping } from "./helper2";
+import { Product } from "./interfaces";
 
-// Create instances of PredictedProcess
-const process1 = new PredictedProcess(1, 'sleep 5; echo "Process 1 completed"');
-const process2 = new PredictedProcess(
-  2,
-  'sleep 10; echo "Process 2 completed"',
-);
-const process3 = new PredictedProcess(
-  3,
-  'sleep 15; echo "Process 3 completed"',
-);
+// Example usage:
+// const products: Product[] = [
+//   {
+//     id: '1',
+//     warehouses: [
+//       { warehouseId: 'A', distanceToCustomer: 10 },
+//       { warehouseId: 'B', distanceToCustomer: 15 }
+//     ]
+//   },
+//   {
+//     id: '2',
+//     warehouses: [
+//       { warehouseId: 'A', distanceToCustomer: 12 },
+//       { warehouseId: 'C', distanceToCustomer: 20 }
+//     ]
+//   },
+//   {
+//     id: '3',
+//     warehouses: [
+//       { warehouseId: 'B', distanceToCustomer: 14 },
+//       { warehouseId: 'C', distanceToCustomer: 18 }
+//     ]
+//   }
+// ];
 
-// Create an instance of PredictedProcessesManager and add processes
-const manager = new PredictedProcessesManager();
-manager.addProcess(process1);
-manager.addProcess(process2);
-manager.addProcess(process3);
+const firstGrouping: Product[] = [
+  {
+    id: "1",
+    warehouses: [{warehouseId: "A", distanceToCustomer: 5}, { warehouseId: "C", distanceToCustomer: 10 }]
+  },
+  {
+    id: "2",
+    warehouses: [{warehouseId: "B", distanceToCustomer: 7}, { warehouseId: "C", distanceToCustomer: 10 }]
+  },
+  {
+    id: "3",
+    warehouses: [{warehouseId: "B", distanceToCustomer: 7}]
+  }
+ ]
 
-// Create an AbortController for managing process cancellation
-const abortController = new AbortController();
-const signal = abortController.signal;
 
-// Run all processes
-manager
-  .runAll(signal)
-  .then(() => {
-    console.log('All processes have exited successfully.');
-  })
-  .catch((error) => {
-    console.log(`An error occurred: ${error}`);
-  });
+ const secondGrouping: Product[] = [
+  {
+    id: "1",
+    warehouses: [{warehouseId: "A", distanceToCustomer: 5}, { warehouseId: "C", distanceToCustomer: 10 }]
+  },
+  {
+    id: "2",
+    warehouses: [{warehouseId: "B", distanceToCustomer: 11}, { warehouseId: "C", distanceToCustomer: 10 }]
+  },
+  {
+    id: "3",
+    warehouses: [{warehouseId: "B", distanceToCustomer: 11}]
+  }
+ ]
 
-/*
-setTimeout(() => {
-  console.log('Aborting all processes.');
-  abortController.abort();
-}, 10_000); // Aborts all processes after 10 seconds
-*/
+
+ const thirdGrouping: Product[] = [
+  {
+    id: "1",
+    warehouses: [{warehouseId: "A", distanceToCustomer: 5}, { warehouseId: "B", distanceToCustomer: 11 }]
+  },
+  {
+    id: "2",
+    warehouses: [{warehouseId: "B", distanceToCustomer: 11}, { warehouseId: "C", distanceToCustomer: 10 }]
+  },
+  {
+    id: "3",
+    warehouses: [{warehouseId: "B", distanceToCustomer: 11}]
+  },
+  {
+    id: "4",
+    warehouses: [{warehouseId: "C", distanceToCustomer: 10}]
+  }
+ ]
+
+
+const bestGrouping = calculateBestGrouping(firstGrouping);
+// const bestGrouping = calculateBestGrouping(secondGrouping);
+// const bestGrouping = calculateBestGrouping(thirdGrouping);
+
+console.log(bestGrouping);
