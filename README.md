@@ -1,5 +1,117 @@
 # Project [Read info](https://docs.google.com/document/d/1Ga2KoEPs_xa5k_CflNmJ4ptfM9Ebt9pqVs4weciF9eM)
 
+### PROBLEM DESCRIPTION:
+
+Assume the following 2 interfaces:
+
+```ts 
+
+interface Product {
+  id: string;
+  warehouses: WarehouseDistance[]
+}
+interface WarehouseDistance {
+  warehouseId: string;
+  distanceToCustomer: number;
+}
+
+```
+
+Write a function, calculateBestGrouping, which takes an array of Products and returns an equal length array of WarehouseDistances.
+
+This problem involves finding the best grouping of products based on certain criteria. Let's break it down:
+
+1. **Input:** The function `calculateBestGrouping` takes an array of `Product` objects as input. Each `Product` object seems to have information about its warehouses.
+
+2. **Objective**: The objective is to determine the best grouping of warehouses for the products. The "best" grouping is defined based:
+   Routes: all warehouses to be visited
+   Total Unique Warehouses:  unique warehouses.
+   Total Distance to Customer: sum of distance across all products.
+
+E.g 
+
+```ts 
+const groupings = [{routes: [A,B,C], totalUnique: 3, totalDistance: 12}, {routes: [A,B,B], totalUnique: 2, totalDistance: 20}]
+
+```
+3. Conditions:
+The function must select the best warehouse for each product, according to this criteria:
+It must use as few different warehouses as possible (if one grouping would have 3 different warehouses and the other one 2, the latter would be selected)
+Out of the fewest warehouse options, select the one with the smallest distanceToConsumer summed across all products.
+
+Sample
+E.g if you have [A,B,C] with a total distance of 12, unique warehouses of 3 and [A,B,B] with a total distance of 20, unique warehouses of 2, [A,B,B] will be the answer as this requires only visiting just two warehouses to get the products.
+
+
+Some examples (across the next 3 pages):
+
+
+```ts
+
+interface Product {
+ id: string;
+ warehouses: WarehouseDistance[]
+}
+interface WarehouseDistance {
+ warehouseId: string;
+ distanceToCustomer: number;
+}
+const calculateBestGrouping = (groupings: Product[]) => {
+ throw "Not implemented"
+}
+const firstGrouping: Product[] = [
+ {
+   id: "1",
+   warehouses: [{warehouseId: "A", distanceToCustomer: 5}, { warehouseId: "C", distanceToCustomer: 10 }]
+ },
+ {
+   id: "2",
+   warehouses: [{warehouseId: "B", distanceToCustomer: 7}, { warehouseId: "C", distanceToCustomer: 10 }]
+ },
+ {
+   id: "3",
+   warehouses: [{warehouseId: "B", distanceToCustomer: 7}]
+ }
+]
+const secondGrouping: Product[] = [
+ {
+   id: "1",
+   warehouses: [{warehouseId: "A", distanceToCustomer: 5}, { warehouseId: "C", distanceToCustomer: 10 }]
+ },
+ {
+   id: "2",
+   warehouses: [{warehouseId: "B", distanceToCustomer: 11}, { warehouseId: "C", distanceToCustomer: 10 }]
+ },
+ {
+   id: "3",
+   warehouses: [{warehouseId: "B", distanceToCustomer: 11}]
+ }
+]
+const thirdGrouping: Product[] = [
+ {
+   id: "1",
+   warehouses: [{warehouseId: "A", distanceToCustomer: 5}, { warehouseId: "B", distanceToCustomer: 11 }]
+ },
+ {
+   id: "2",
+   warehouses: [{warehouseId: "B", distanceToCustomer: 11}, { warehouseId: "C", distanceToCustomer: 10 }]
+ },
+ {
+   id: "3",
+   warehouses: [{warehouseId: "B", distanceToCustomer: 11}]
+ },
+ {
+   id: "4",
+   warehouses: [{warehouseId: "C", distanceToCustomer: 10}]
+ }
+]
+calculateBestGrouping(firstGrouping); // Should return: ["A", "B", "B"], totalDistance = 19
+calculateBestGrouping(secondGrouping); // Should return ["A", "B", "B"], totalDistance = 27
+calculateBestGrouping(thirdGrouping); // Should return: ["B", "C", "B", "C"], totalDistance = 42
+
+```
+
+
 
 ### SOLUTION DESCRIPTION
 
