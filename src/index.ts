@@ -1,5 +1,5 @@
 
-import { calculateBestGrouping } from "./helper";
+import { calculateBestGrouping } from "./helper2";
 
 import { Product } from "./interfaces";
 
